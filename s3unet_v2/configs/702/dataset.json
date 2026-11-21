@@ -1,0 +1,25 @@
+{
+  "channel_names": {
+    "0": "MR"
+  },
+  "labels": {
+    "background": 0,
+    "liver": 1,
+    "right kidney": 2,
+    "spleen": 3,
+    "pancreas": 4,
+    "aorta": 5,
+    "inferior vena cava": 6,
+    "right adrenal gland": 7,
+    "left adrenal gland": 8,
+    "gallbladder": 9,
+    "esophagus": 10,
+    "stomach": 11,
+    "duodenum": 12,
+    "left kidney": 13
+  },
+  "numTraining": 60,
+  "file_ending": ".nii.gz",
+  "name": "Dataset702_AbdomenMR",
+  "description": "AMOS 2022 MRI subset with 13 foreground organs."
+}

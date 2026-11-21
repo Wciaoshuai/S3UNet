@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=67.8", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "s3unet-v2"
+version = "2.0.0"
+description = "S3UNet: shared/low-rank SSM segmentation, full training and native inference"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {file = "LICENSE"}
+dependencies = [
+  "torch==2.5.1", "numpy>=1.26,<3", "scipy", "scikit-learn", "scikit-image",
+  "acvl-utils>=0.2.3,<0.3",
+  "batchgenerators>=0.25.1", "batchgeneratorsv2==0.3.6", "blosc2>=3",
+  "Pillow", "SimpleITK", "nibabel", "tifffile", "imagecodecs",
+  "matplotlib", "seaborn", "pandas", "threadpoolctl", "tqdm", "surface-distance==0.1"
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+s3unet-configure = "s3unet_v2.configure:main"
+s3unet-evaluate = "s3unet_v2.evaluate:main"
+s3unet-check = "s3unet_v2.checks:main"
+nnUNetv2_extract_fingerprint = "nnunetv2.experiment_planning.plan_and_preprocess_entrypoints:extract_fingerprint_entry"
+nnUNetv2_preprocess = "nnunetv2.experiment_planning.plan_and_preprocess_entrypoints:preprocess_entry"
+nnUNetv2_train = "nnunetv2.run.run_training:run_training_entry"
+nnUNetv2_predict = "nnunetv2.inference.predict_from_raw_data:predict_entry_point"
+nnUNetv2_predict_from_modelfolder = "nnunetv2.inference.predict_from_raw_data:predict_entry_point_modelfolder"
+nnUNetv2_evaluate_folder = "nnunetv2.evaluation.evaluate_predictions:evaluate_folder_entry_point"
+
+[tool.setuptools.packages.find]
+include = ["s3unet_v2*", "nnunetv2*"]
+
+[tool.setuptools.package-data]
+s3unet_v2 = ["configs/*/*.json"]

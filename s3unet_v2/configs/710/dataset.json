@@ -1,0 +1,28 @@
+{
+  "channel_names": {
+    "0": "CT"
+  },
+  "labels": {
+    "background": 0,
+    "kidney": [
+      1,
+      2,
+      3
+    ],
+    "masses": [
+      2,
+      3
+    ],
+    "tumor": 2
+  },
+  "numTraining": 439,
+  "file_ending": ".nii.gz",
+  "name": "KiTS2023",
+  "description": "KiTS2023",
+  "overwrite_image_reader_writer": "NibabelIOWithReorient",
+  "regions_class_order": [
+    1,
+    3,
+    2
+  ]
+}
