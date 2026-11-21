@@ -7,7 +7,7 @@ from torch import nn
 from torch.nn.modules.conv import _ConvNd
 from torch.nn.modules.dropout import _DropoutNd
 
-from nnunetv2.nets.ssm_decoder import S3Decoder
+from nnunetv2.nets.s3_decoder import S3Decoder
 
 
 class PlainConvUNet(nn.Module):
@@ -31,7 +31,7 @@ class PlainConvUNet(nn.Module):
         nonlin_kwargs: dict = None,
         deep_supervision: bool = False,
         nonlin_first: bool = False,
-        decoder_discretization: str = "s3unet_v2",
+        decoder_discretization: str = "s3unet",
         ssm_core_config: dict = None,
     ):
         super().__init__()
@@ -65,7 +65,7 @@ class PlainConvUNet(nn.Module):
             return_skips=True,
             nonlin_first=nonlin_first,
         )
-        if decoder_discretization not in ("s3unet_v2", "fusessm_zoh_approx_ablation"):
+        if decoder_discretization not in ("s3unet", "s3unet_v2", "fusessm_zoh_approx_ablation"):
             raise ValueError("Only S3UNet is included in this release")
         self.decoder = S3Decoder(self.encoder, num_classes, deep_supervision, ssm_core_config)
         self.checkpoint_encoder = False

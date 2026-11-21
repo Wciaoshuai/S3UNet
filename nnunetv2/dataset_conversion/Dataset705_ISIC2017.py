@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 import numpy as np
 from PIL import Image
 
-from s3unet_v2.model import load_configuration
+from nnunetv2.experiment_planning.s3unet_plans import load_configuration
 
 
 def convert_training(images_dir: Path, masks_dir: Path) -> Path:

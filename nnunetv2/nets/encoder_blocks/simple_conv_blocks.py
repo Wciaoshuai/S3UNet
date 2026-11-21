@@ -1,5 +1,5 @@
 # Adapted from dynamic-network-architectures 0.4.4, Apache-2.0.
-# See LICENSE.encoder and NOTICE.md.
+# See the repository LICENSE for the original copyright notice.
 from typing import Tuple, List, Union, Type
 
 import numpy as np

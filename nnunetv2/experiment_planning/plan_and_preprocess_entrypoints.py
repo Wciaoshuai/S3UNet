@@ -71,7 +71,7 @@ def preprocess_entry():
     )
     parser.add_argument(
         "-plans_name",
-        default="S3UNetV2Plans",
+        default="S3UNetPlans",
         required=False,
         help="[OPTIONAL] You can use this to specify a custom plans file that you may have generated",
     )

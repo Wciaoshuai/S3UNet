@@ -1,17 +1,17 @@
 {
-  "dataset_name": "Dataset702_AbdomenMR",
-  "plans_name": "S3UNetV2Plans",
+  "dataset_name": "Dataset704_Endovis17",
+  "plans_name": "S3UNetPlans",
   "original_median_spacing_after_transp": [
-    3.0,
-    1.1875,
-    1.1875
+    999.0,
+    1.0,
+    1.0
   ],
   "original_median_shape_after_transp": [
-    72,
-    242,
-    319
+    1,
+    1080,
+    1920
   ],
-  "image_reader_writer": "SimpleITKIO",
+  "image_reader_writer": "NaturalImage2DIO",
   "transpose_forward": [
     0,
     1,
@@ -23,29 +23,30 @@
     2
   ],
   "configurations": {
-    "3d_fullres": {
-      "data_identifier": "S3UNetV2Plans_3d_fullres",
+    "2d": {
+      "data_identifier": "S3UNetPlans_2d",
       "preprocessor_name": "DefaultPreprocessor",
-      "batch_size": 1,
+      "batch_size": 2,
       "patch_size": [
-        48,
-        160,
-        224
+        384,
+        640
       ],
       "median_image_size_in_voxels": [
-        72.0,
-        258.0,
-        319.0
+        1080.0,
+        1920.0
       ],
       "spacing": [
-        3.0,
-        1.1875,
-        1.1875
+        1.0,
+        1.0
       ],
       "normalization_schemes": [
+        "ZScoreNormalization",
+        "ZScoreNormalization",
         "ZScoreNormalization"
       ],
       "use_mask_for_norm": [
+        false,
+        false,
         false
       ],
       "resampling_fn_data": "resample_data_or_seg_to_shape",
@@ -72,44 +73,53 @@
       "architecture": {
         "network_class_name": "nnunetv2.nets.unet.PlainConvUNet",
         "arch_kwargs": {
-          "n_stages": 6,
+          "n_stages": 9,
           "features_per_stage": [
             32,
             64,
             128,
             256,
-            320,
-            320
+            512,
+            512,
+            512,
+            512,
+            512
           ],
-          "conv_op": "torch.nn.modules.conv.Conv3d",
+          "conv_op": "torch.nn.modules.conv.Conv2d",
           "kernel_sizes": [
             [
-              1,
               3,
               3
             ],
             [
               3,
+              3
+            ],
+            [
               3,
               3
             ],
             [
               3,
+              3
+            ],
+            [
               3,
               3
             ],
             [
               3,
+              3
+            ],
+            [
               3,
               3
             ],
             [
               3,
-              3,
               3
             ],
             [
-              3,
               3,
               3
             ]
@@ -117,36 +127,45 @@
           "strides": [
             [
               1,
-              1,
               1
             ],
             [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
               1,
-              2,
-              2
-            ],
-            [
-              2,
-              2,
-              2
-            ],
-            [
-              2,
-              2,
-              2
-            ],
-            [
-              2,
-              2,
-              2
-            ],
-            [
-              1,
-              2,
-              2
+              1
             ]
           ],
           "n_conv_per_stage": [
+            2,
+            2,
+            2,
             2,
             2,
             2,
@@ -159,10 +178,13 @@
             2,
             2,
             2,
+            2,
+            2,
+            2,
             2
           ],
           "conv_bias": true,
-          "norm_op": "torch.nn.modules.instancenorm.InstanceNorm3d",
+          "norm_op": "torch.nn.modules.instancenorm.InstanceNorm2d",
           "norm_op_kwargs": {
             "eps": 1e-05,
             "affine": true
@@ -173,31 +195,31 @@
           "nonlin_kwargs": {
             "inplace": true
           },
-          "decoder_discretization": "s3unet_v2",
+          "decoder_discretization": "s3unet",
           "ssm_core_config": {
-            "a_shared": false,
-            "bias_shared": false,
+            "a_shared": true,
+            "bias_shared": true,
             "rank": 16,
             "maps": {
               "B_base": {
-                "mode": "lowrank",
-                "rank": 16
+                "mode": "shared",
+                "rank": 0
               },
               "Wr_u": {
-                "mode": "lowrank",
-                "rank": 16
+                "mode": "shared",
+                "rank": 0
               },
               "Wr_h": {
-                "mode": "lowrank",
-                "rank": 16
+                "mode": "shared",
+                "rank": 0
               },
               "Wz_u": {
-                "mode": "lowrank",
-                "rank": 16
+                "mode": "shared",
+                "rank": 0
               },
               "Wz_h": {
-                "mode": "lowrank",
-                "rank": 16
+                "mode": "shared",
+                "rank": 0
               }
             },
             "reset_gate": true,

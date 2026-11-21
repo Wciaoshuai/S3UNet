@@ -1,5 +1,5 @@
 # Adapted from dynamic-network-architectures 0.4.4, Apache-2.0.
-# See LICENSE.encoder and NOTICE.md.
+# See the repository LICENSE for the original copyright notice.
 import torch
 from torch import nn
 import numpy as np

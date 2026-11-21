@@ -13,9 +13,9 @@ import torch
 from torch import nn
 from nnunetv2.nets.encoder_blocks.plain_conv_encoder import PlainConvEncoder
 from nnunetv2.nets.unet import PlainConvUNet
-from nnunetv2.nets.ssm_core import MAP_NAMES
+from nnunetv2.nets.s3_core import MAP_NAMES
 from nnunetv2.nets.upsampling import ProjectUpsample
-from .model import load_configuration
+from nnunetv2.experiment_planning.s3unet_plans import load_configuration
 
 
 def seed_everything(seed=2026):

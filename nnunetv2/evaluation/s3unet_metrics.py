@@ -3,7 +3,8 @@
 Cell protocol: JunMa11/NeurIPS-CellSeg baseline/compute_metric.py.
 AMOS protocol: bowang-lab/U-Mamba evaluation/{abdomen_DSC,abdomen_NSD}_Eval.py.
 KiTS protocol: neheller/kits23 kits23/evaluation/metrics.py.
-Pinned reference files and their hashes accompany the experiment manifest.
+KiTS label definitions follow neheller/kits23 kits23/configuration/labels.py.
+KiTS surface Dice uses the surface-distance package.
 """
 
 from pathlib import Path
@@ -131,7 +132,7 @@ def cell_instance_metrics(gt, pred, large_threshold=25_000_000, tile_size=2000):
 
 
 def amos_metrics(pred, gt, spacing):
-    from s3unet_v2.umamba_surface_dice import (
+    from .umamba_surface_dice import (
         compute_surface_distances,
         compute_surface_dice_at_tolerance,
     )

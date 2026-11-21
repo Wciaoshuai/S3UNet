@@ -13,8 +13,8 @@ import torch
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
 from nnunetv2.training.dataloading.data_loader import nnUNetDataLoader
 from nnunetv2.training.dataloading.ordered_prefetch import OrderedPrefetch
-from s3unet_v2.initialization import initialize_model, seed_everything
-from s3unet_v2.model import DEFAULT_VARIANTS
+from nnunetv2.utilities.network_initialization import initialize_model, seed_everything
+from nnunetv2.experiment_planning.s3unet_plans import DEFAULT_VARIANTS
 
 
 def atomic_save(value, path):
@@ -45,7 +45,7 @@ def restore_rng(state):
         torch.cuda.set_rng_state_all(state["cuda"])
 
 
-class nnUNetTrainerS3UNetV2(nnUNetTrainer):
+class nnUNetTrainerS3UNet(nnUNetTrainer):
     def __init__(
         self,
         plans: dict,
@@ -325,7 +325,7 @@ class nnUNetTrainerS3UNetV2(nnUNetTrainer):
         from nnunetv2.inference.export_prediction import export_prediction_from_logits
         from nnunetv2.inference.sliding_window_prediction import compute_gaussian
         from nnunetv2.paths import nnUNet_raw
-        from s3unet_v2.metrics import evaluate_case, aggregate
+        from nnunetv2.evaluation.s3unet_metrics import evaluate_case, aggregate
 
         state_before = rng_state()
         was_training = self.network.training
@@ -487,3 +487,7 @@ class nnUNetTrainerS3UNetV2(nnUNetTrainer):
                     loader.close()
             for s, handler in previous.items():
                 signal.signal(s, handler)
+
+
+class nnUNetTrainerS3UNetV2(nnUNetTrainerS3UNet):
+    """Resolve the trainer name stored in existing checkpoints and result paths."""

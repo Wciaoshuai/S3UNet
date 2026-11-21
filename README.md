@@ -12,8 +12,7 @@ Use Linux with Python 3.12 and PyTorch 2.5.1 (CUDA 12.1).
 conda create -n s3unet python=3.12 -y
 conda activate s3unet
 python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu121
-python -m pip install -r requirements.lock.txt
-python -m pip install --no-deps -e .
+python -m pip install -e .
 s3unet-check
 ```
 
@@ -29,7 +28,7 @@ export nnUNet_results="$PWD/data/nnUNet_results"
 mkdir -p "$nnUNet_raw" "$nnUNet_preprocessed" "$nnUNet_results"
 ```
 
-Place the data in nnU-Net format under `nnUNet_raw` using the [bundled dataset templates](s3unet_v2/configs/). ISIC2017 and CellSeg converters are in `nnunetv2/dataset_conversion/`.
+Place the data in nnU-Net format under `nnUNet_raw` using the [bundled dataset templates](nnunetv2/experiment_planning/presets/). ISIC2017 and CellSeg converters are in `nnunetv2/dataset_conversion/`.
 
 ### Preprocessing
 
@@ -61,4 +60,4 @@ Use `2d` or `3d_fullres` for `CONFIGURATION`.
 
 ## Acknowledgements
 
-The training framework builds on [nnU-Net](https://github.com/MIC-DKFZ/nnUNet). See [NOTICE.md](NOTICE.md) for source attribution.
+The training framework and encoder build on nnU-Net and dynamic-network-architectures. [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) · [dynamic-network-architectures](https://github.com/MIC-DKFZ/dynamic-network-architectures)

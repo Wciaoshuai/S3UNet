@@ -3,8 +3,8 @@
 import argparse
 import json
 from pathlib import Path
-from .model import DEFAULT_VARIANTS, load_configuration
-from .metrics import evaluate_case, aggregate
+from nnunetv2.evaluation.s3unet_metrics import evaluate_case, aggregate
+from nnunetv2.experiment_planning.s3unet_plans import DEFAULT_VARIANTS, load_configuration
 
 
 def main():

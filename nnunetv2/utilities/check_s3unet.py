@@ -2,8 +2,9 @@
 
 import argparse
 import json
-from .model import build_model, DEFAULT_VARIANTS
-from .initialization import parameter_counts
+from nnunetv2.experiment_planning.s3unet_plans import DEFAULT_VARIANTS
+from nnunetv2.utilities.get_network_from_plans import build_model
+from nnunetv2.utilities.network_initialization import parameter_counts
 
 
 def main():

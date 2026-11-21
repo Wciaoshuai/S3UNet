@@ -32,8 +32,8 @@ def find_free_network_port() -> int:
 def get_trainer_from_args(dataset_name_or_id: Union[int, str],
                           configuration: str,
                           fold: int,
-                          trainer_name: str = 'nnUNetTrainerS3UNetV2',
-                          plans_identifier: str = 'S3UNetV2Plans',
+                          trainer_name: str = 'nnUNetTrainerS3UNet',
+                          plans_identifier: str = 'S3UNetPlans',
                           device: torch.device = torch.device('cuda')):
     # load nnunet class and do sanity checks
     nnunet_trainer = recursive_find_python_class(join(nnunetv2.__path__[0], "training", "nnUNetTrainer"),
@@ -135,8 +135,8 @@ def run_ddp(rank, dataset_name_or_id, configuration, fold, tr, p, disable_checkp
 
 def run_training(dataset_name_or_id: Union[str, int],
                  configuration: str, fold: Union[int, str],
-                 trainer_class_name: str = 'nnUNetTrainerS3UNetV2',
-                 plans_identifier: str = 'S3UNetV2Plans',
+                 trainer_class_name: str = 'nnUNetTrainerS3UNet',
+                 plans_identifier: str = 'S3UNetPlans',
                  pretrained_weights: Optional[str] = None,
                  num_gpus: int = 1,
                  export_validation_probabilities: bool = False,
@@ -218,11 +218,11 @@ def run_training_entry():
     parser.add_argument('configuration', type=str,
                         help="Configuration that should be trained")
     parser.add_argument('fold', type=str,
-                        help='Fold of the 5-fold cross-validation. Should be an int between 0 and 4.')
-    parser.add_argument('-tr', type=str, required=False, default='nnUNetTrainerS3UNetV2',
-                        help='[OPTIONAL] Use this flag to specify a custom trainer. Default: nnUNetTrainer')
-    parser.add_argument('-p', type=str, required=False, default='S3UNetV2Plans',
-                        help='[OPTIONAL] Use this flag to specify a custom plans identifier. Default: nnUNetPlans')
+                        help='Use all for the full training set or a fold index from 0 to 4.')
+    parser.add_argument('-tr', type=str, required=False, default='nnUNetTrainerS3UNet',
+                        help='[OPTIONAL] Use this flag to specify a custom trainer. Default: nnUNetTrainerS3UNet')
+    parser.add_argument('-p', type=str, required=False, default='S3UNetPlans',
+                        help='[OPTIONAL] Use this flag to specify a custom plans identifier. Default: S3UNetPlans')
     parser.add_argument('-pretrained_weights', type=str, required=False, default=None,
                         help='[OPTIONAL] path to nnU-Net checkpoint file to be used as pretrained model. Will only '
                              'be used when actually training. Beta. Use with caution.')

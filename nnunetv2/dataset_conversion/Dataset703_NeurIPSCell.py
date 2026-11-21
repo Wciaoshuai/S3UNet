@@ -12,7 +12,7 @@ import numpy as np
 from skimage import io, segmentation
 import tifffile as tif
 
-from s3unet_v2.model import load_configuration
+from nnunetv2.experiment_planning.s3unet_plans import load_configuration
 
 
 SUPPORTED_IMAGE_SUFFIXES = {".png", ".bmp", ".tif", ".tiff", ".jpg", ".jpeg"}

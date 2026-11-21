@@ -1,17 +1,17 @@
 {
-  "dataset_name": "Dataset710_KiTS2023",
-  "plans_name": "S3UNetV2Plans",
+  "dataset_name": "Dataset702_AbdomenMR",
+  "plans_name": "S3UNetPlans",
   "original_median_spacing_after_transp": [
     3.0,
-    0.78125,
-    0.78125
+    1.1875,
+    1.1875
   ],
   "original_median_shape_after_transp": [
-    104,
-    512,
-    512
+    72,
+    242,
+    319
   ],
-  "image_reader_writer": "NibabelIOWithReorient",
+  "image_reader_writer": "SimpleITKIO",
   "transpose_forward": [
     0,
     1,
@@ -24,26 +24,26 @@
   ],
   "configurations": {
     "3d_fullres": {
-      "data_identifier": "S3UNetV2Plans_3d_fullres",
+      "data_identifier": "S3UNetPlans_3d_fullres",
       "preprocessor_name": "DefaultPreprocessor",
       "batch_size": 1,
       "patch_size": [
-        128,
-        128,
-        128
+        48,
+        160,
+        224
       ],
       "median_image_size_in_voxels": [
-        417.0,
-        512.0,
-        512.0
+        72.0,
+        258.0,
+        319.0
       ],
       "spacing": [
-        1.0,
-        0.78125,
-        0.78125
+        3.0,
+        1.1875,
+        1.1875
       ],
       "normalization_schemes": [
-        "CTNormalization"
+        "ZScoreNormalization"
       ],
       "use_mask_for_norm": [
         false
@@ -84,7 +84,7 @@
           "conv_op": "torch.nn.modules.conv.Conv3d",
           "kernel_sizes": [
             [
-              3,
+              1,
               3,
               3
             ],
@@ -121,12 +121,7 @@
               1
             ],
             [
-              2,
-              2,
-              2
-            ],
-            [
-              2,
+              1,
               2,
               2
             ],
@@ -142,6 +137,11 @@
             ],
             [
               2,
+              2,
+              2
+            ],
+            [
+              1,
               2,
               2
             ]
@@ -173,31 +173,31 @@
           "nonlin_kwargs": {
             "inplace": true
           },
-          "decoder_discretization": "s3unet_v2",
+          "decoder_discretization": "s3unet",
           "ssm_core_config": {
             "a_shared": false,
             "bias_shared": false,
-            "rank": 8,
+            "rank": 16,
             "maps": {
               "B_base": {
                 "mode": "lowrank",
-                "rank": 8
+                "rank": 16
               },
               "Wr_u": {
                 "mode": "lowrank",
-                "rank": 8
+                "rank": 16
               },
               "Wr_h": {
                 "mode": "lowrank",
-                "rank": 8
+                "rank": 16
               },
               "Wz_u": {
                 "mode": "lowrank",
-                "rank": 8
+                "rank": 16
               },
               "Wz_h": {
                 "mode": "lowrank",
-                "rank": 8
+                "rank": 16
               }
             },
             "reset_gate": true,

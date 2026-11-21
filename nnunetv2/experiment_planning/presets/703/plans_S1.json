@@ -1,6 +1,6 @@
 {
   "dataset_name": "Dataset703_NeurIPSCell",
-  "plans_name": "S3UNetV2Plans",
+  "plans_name": "S3UNetPlans",
   "original_median_spacing_after_transp": [
     999.0,
     1.0,
@@ -24,7 +24,7 @@
   ],
   "configurations": {
     "2d": {
-      "data_identifier": "S3UNetV2Plans_2d",
+      "data_identifier": "S3UNetPlans_2d",
       "preprocessor_name": "DefaultPreprocessor",
       "batch_size": 4,
       "patch_size": [
@@ -195,7 +195,7 @@
           "nonlin_kwargs": {
             "inplace": true
           },
-          "decoder_discretization": "s3unet_v2",
+          "decoder_discretization": "s3unet",
           "ssm_core_config": {
             "a_shared": true,
             "bias_shared": true,

@@ -3,8 +3,9 @@
 import copy
 import pytest
 import torch
-from s3unet_v2 import build_model, load_weights
-from s3unet_v2.initialization import parameter_counts
+from nnunetv2.run.load_pretrained_weights import load_weights
+from nnunetv2.utilities.get_network_from_plans import build_model
+from nnunetv2.utilities.network_initialization import parameter_counts
 
 torch.set_num_threads(2)
 

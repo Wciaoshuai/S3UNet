@@ -20,7 +20,7 @@ from torch.nn.parallel import DistributedDataParallel
 from tqdm import tqdm
 
 import nnunetv2
-from s3unet_v2.weights import load_weights
+from nnunetv2.run.load_pretrained_weights import load_weights
 from nnunetv2.configuration import default_num_processes
 from nnunetv2.inference.data_iterators import PreprocessAdapterFromNpy, preprocessing_iterator_fromfiles, \
     preprocessing_iterator_fromnpy
@@ -102,7 +102,7 @@ class nnUNetPredictor(object):
         # restore network
         num_input_channels = determine_num_input_channels(plans_manager, configuration_manager, dataset_json)
         if trainer_name in ('nnUNetTrainerFuseSSMFull1000', 'nnUNetTrainerFuseSSMAblation'):
-            trainer_name = 'nnUNetTrainerS3UNetV2'
+            trainer_name = 'nnUNetTrainerS3UNet'
         trainer_class = recursive_find_python_class(join(nnunetv2.__path__[0], "training", "nnUNetTrainer"),
                                                     trainer_name, 'nnunetv2.training.nnUNetTrainer')
         if trainer_class is None:
@@ -875,11 +875,11 @@ def predict_entry_point():
                              'have the same name as their source images.')
     parser.add_argument('-d', type=str, required=True,
                         help='Dataset with which you would like to predict. You can specify either dataset name or id')
-    parser.add_argument('-p', type=str, required=False, default='S3UNetV2Plans',
+    parser.add_argument('-p', type=str, required=False, default='S3UNetPlans',
                         help='Plans identifier. Specify the plans in which the desired configuration is located. '
-                             'Default: nnUNetPlans')
-    parser.add_argument('-tr', type=str, required=False, default='nnUNetTrainerS3UNetV2',
-                        help='What nnU-Net trainer class was used for training? Default: nnUNetTrainer')
+                             'Default: S3UNetPlans')
+    parser.add_argument('-tr', type=str, required=False, default='nnUNetTrainerS3UNet',
+                        help='What nnU-Net trainer class was used for training? Default: nnUNetTrainerS3UNet')
     parser.add_argument('-c', type=str, required=True,
                         help='nnU-Net configuration that should be used for prediction. Config must be located '
                              'in the plans specified with -p')

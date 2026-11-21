@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
-from .ssm_core import S3SSMCore
+from .s3_core import S3SSMCore
 from .upsampling import ProjectUpsample
 
 
